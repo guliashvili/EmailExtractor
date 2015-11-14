@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        EmailExtractor emailExtractor = new EmailExtractor("/users/gguliash/Desktop/Linda/CVs");
+        EmailExtractor emailExtractor = new EmailExtractor("../Cvs");
         List<String> emails = emailExtractor.getEmails();
 
         File f = new File("out.txt");

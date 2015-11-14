@@ -213,7 +213,10 @@ public class EmailExtractor {
     private void makeListUnique(List<String> emails){
         emails.sort((a,b) -> a.compareTo(b));
         int k = -1;
-        for(int i = 0; i < emails.size(); i++) if(k == -1 || !emails.get(i).equals(emails.get(k))) k++;
+        for(int i = 0; i < emails.size(); i++) {
+            if(k == -1 || !emails.get(i).equals(emails.get(k))) k++;
+            emails.set(k,emails.get(i));
+        }
         while(k+1 < emails.size()) emails.remove(emails.size()-1);
     }
 
