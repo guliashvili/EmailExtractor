@@ -11,6 +11,12 @@ public class Main {
 
 
     public static void main(String[] args) {
+        try{
+            new File("unresolved").delete();
+            new File("unresolved").mkdir();
+        }catch (Exception e){
+
+        }
 
         EmailExtractor emailExtractor = new EmailExtractor("Cvs");
         List<String> emails = emailExtractor.getEmails();

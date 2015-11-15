@@ -1,5 +1,7 @@
 package com.company;
 
+import com.google.common.collect.Lists;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,19 +13,30 @@ public class EmailFinder {
 
     private static List<String> getEmailFromSmallText(String part){
         int mid = part.indexOf('@');
-        int mid1 = part.indexOf('.',mid);
-        if(mid == -1 || mid1 == -1) return null;
+        List<Integer> MID1 = new ArrayList<>();
+        {
+            int md = mid + 1;
+            while(true){
+                md = part.indexOf('.',md);
+                if(md == -1) break;
+                MID1.add(md);
+                md++;
+            }
+            MID1 = Lists.reverse(MID1);
+        }
+        if(mid == -1 || MID1.size() == 0) return null;
         int s = mid-1,e = -1;
 
         while(s >= 0 && (Character.isAlphabetic(part.charAt(s)) || Character.isDigit(part.charAt(s)))) s--;
         s++;
 
         for(String domain : EmailChecker.domains){
-
-            if(part.startsWith(domain,mid1+1)){
-                e = mid1 + domain.length() + 1;
-                break;
-            }
+            if(e != -1) break;
+            for(int mid1 : MID1)
+              if(part.startsWith(domain,mid1+1)){
+                 e = mid1 + domain.length() + 1;
+                 break;
+              }
         }
         if(e == -1 ) return null;
 
@@ -61,8 +74,14 @@ public class EmailFinder {
         List<String> ls = Arrays.asList(tokens);
 
         List<String> filtered = EmailChecker.validate(ls);
-        if(filtered == null || filtered.size() == 0)
+        if(filtered == null || filtered.size() == 0) {
             filtered = getEmailDeepAnalysis(text);
+            if(filtered == null || filtered.size() == 0){
+               // filtered = getEmailDeepAnalysis(text);
+            }else {
+                //System.out.println(filtered.get(0));
+            }
+        }
 
         return filtered;
     }

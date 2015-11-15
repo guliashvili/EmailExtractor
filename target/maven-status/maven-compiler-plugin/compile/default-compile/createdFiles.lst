@@ -1,6 +1,10 @@
+com/company/EmailChecker$2.class
+com/company/TextExtractor.class
 com/company/EmailValidator.class
 com/company/Main.class
-com/company/EmailExtractor$1.class
+com/company/EmailFinder.class
+com/company/EmailChecker$3.class
 com/company/EmailExtractor.class
-com/company/EmailExtractor$2.class
+com/company/EmailChecker$1.class
+com/company/EmailChecker.class
 com/company/Validator.class

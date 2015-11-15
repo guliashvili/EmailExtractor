@@ -1,12 +1,17 @@
 package com.company;
 
 
+import net.didion.jwnl.data.Exc;
+import org.apache.commons.io.FileUtils;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 import java.util.regex.Pattern;
 /**
@@ -45,13 +50,21 @@ public class EmailExtractor {
 
 
 
+    private void couldNot(File f){
+        try{
+            File sec = new File("unresolved/"+f.getName());
+            sec.createNewFile();
+            FileUtils.copyFile(f, sec);
+        }catch (Exception e){
 
+        }
+    }
 
     private List<String> getEmails(List<File> files){
         List<String> ret = new ArrayList<>();
         for(File file : files) {
             String text = TextExtractor.getText(file);
-            if(text == null) error++;
+            if(text == null) {error++;couldNot(file);}
             else {
 
                 List<String> get = EmailFinder.getEmail(text);
@@ -59,8 +72,9 @@ public class EmailExtractor {
                     ret.addAll(get);
                 if (get == null || get.size() == 0) {
                     couldnot++;
-                    System.out.println(file.getPath());
-                    System.out.println(text);
+                    couldNot(file);
+                    //System.out.println(file.getPath());
+                    //System.out.println(text);
                 }
             }
         }

@@ -1,5 +1,7 @@
 package com.company;
 
+import com.google.common.base.CharMatcher;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import java.io.InputStream;
@@ -23,9 +25,30 @@ public class EmailChecker {
         emailValidator.addValidator(email ->
                 ptr.matcher(email).matches());
 
+        emailValidator.addValidator(email ->
+                email.indexOf('@') != -1 &&
+                        email.lastIndexOf('.') > email.indexOf('@') &&
+                        email.lastIndexOf('@') == email.indexOf('@')
+        );
+
         emailValidator.addValidator(new Validator() {
             @Override
             public boolean matches(String email) {
+                for(String suf : emailSuffixes){
+                    if(email.endsWith(suf)) return true;
+                }
+                return false;
+            }
+        });
+
+
+
+        //they can only check ASCII emails
+
+        emailValidator.addValidator(new Validator() {
+            @Override
+            public boolean matches(String email) {
+                if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
                 try {
                     InternetAddress emailAddress = new InternetAddress(email);
                     emailAddress.validate();
@@ -39,6 +62,8 @@ public class EmailChecker {
         emailValidator.addValidator(new Validator() {
             @Override
             public boolean matches(String email) {
+
+                if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
                 return org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(email);
             }
         });
