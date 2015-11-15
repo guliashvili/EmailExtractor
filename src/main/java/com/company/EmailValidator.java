@@ -16,8 +16,9 @@ public class EmailValidator {
         List<String> ret = new ArrayList<>();
         for(String possible : possibles){
             boolean isCorrect = true;
-            for(Validator validator : validators)
-                isCorrect &= validator.matches(possible);
+            for(Validator validator : validators){
+                if(!(isCorrect &= validator.matches(possible))) break;
+            }
             if(isCorrect) ret.add(possible);
         }
         return ret;

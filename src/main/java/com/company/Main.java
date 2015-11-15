@@ -1,9 +1,5 @@
 package com.company;
 
-import org.apache.lucene.document.Document;
-import org.apache.pdfbox.lucene.LucenePDFDocument;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.util.PDFTextStripper;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -42,16 +42,7 @@
     <artifactId>PdfToEmail</artifactId>
     <version>1.0-SNAPSHOT</version>
 <dependencies>
-    <dependency>
-        <groupId>org.apache.pdfbox</groupId>
-        <artifactId>pdfbox</artifactId>
-        <version>1.8.10</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.pdfbox</groupId>
-        <artifactId>pdfbox-lucene</artifactId>
-        <version>1.8.10</version>
-    </dependency>
+
     <dependency>
         <groupId>javax.mail</groupId>
         <artifactId>mail</artifactId>
@@ -67,6 +58,17 @@
         <artifactId>commons-io</artifactId>
         <version>2.4</version>
     </dependency>
+    <dependency>
+        <groupId>org.apache.tika</groupId>
+        <artifactId>tika-core</artifactId>
+        <version>1.11</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.tika</groupId>
+        <artifactId>tika-parsers</artifactId>
+        <version>1.11</version>
+    </dependency>
+
 
 
 
