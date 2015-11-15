@@ -1,9 +1,7 @@
 package com.company;
 
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +27,12 @@ public class Main {
                 System.err.println(e.getMessage());
             }
         }
-        try(FileWriter fw = new FileWriter(f)){
-            try(BufferedWriter bw = new BufferedWriter(fw)){
-                for(String s : emails) bw.append(s+"\n");
+
+        try(FileOutputStream fos = new FileOutputStream(f)){
+            try (OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8")){
+                try (BufferedWriter bw = new BufferedWriter(osw)) {
+                    for (String s : emails) bw.append(s + "\n");
+                }
             }
 
         }catch (Exception e){

@@ -48,7 +48,7 @@ public class EmailChecker {
         emailValidator.addValidator(new Validator() {
             @Override
             public boolean matches(String email) {
-                if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
+               // if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
                 try {
                     InternetAddress emailAddress = new InternetAddress(email);
                     emailAddress.validate();
@@ -63,7 +63,7 @@ public class EmailChecker {
             @Override
             public boolean matches(String email) {
 
-                if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
+               // if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
                 return org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(email);
             }
         });

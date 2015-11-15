@@ -91,9 +91,19 @@ public class EmailExtractor {
         while(k+1 < emails.size()) emails.remove(emails.size()-1);
     }
 
+    private void removeWhiteSpaces(List<String> emails){
+        for(int i = 0; i < emails.size(); i++){
+            String s = emails.get(i);
+            String ret = new String();
+            for(int j = 0; j < s.length(); j++) if(!Character.isWhitespace(s.charAt(j))) ret = ret + s.charAt(j);
+            emails.set(i,ret);
+        }
+    }
+
     public List<String> getEmails(){
         List<File> files = getFiles();
         List<String> emails = getEmails(files);
+        removeWhiteSpaces(emails);
         makeListUnique(emails);
 
         System.out.println("couldnot = " + couldnot + " ; error = " + error + " ; differentExt = " + differentExt);
