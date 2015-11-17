@@ -62,7 +62,7 @@ public class EmailChecker {
         emailValidator.addValidator(new Validator() {
             @Override
             public boolean matches(String email) {
-
+                //small change
                // if(!CharMatcher.ASCII.matchesAllOf(email)) return true;
                 return org.apache.commons.validator.routines.EmailValidator.getInstance().isValid(email);
             }
